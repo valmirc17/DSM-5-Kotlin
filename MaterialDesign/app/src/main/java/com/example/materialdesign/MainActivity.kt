@@ -6,14 +6,36 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.border
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.absoluteOffset
+import androidx.compose.foundation.layout.asPaddingValues
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.systemBars
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyColumn
+
+import androidx.compose.foundation.lazy.itemsIndexed
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import com.example.materialdesign.ui.theme.MaterialDesignTheme
 
 class MainActivity : ComponentActivity() {
@@ -25,13 +47,21 @@ class MainActivity : ComponentActivity() {
         setContent {
             MaterialDesignTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) {
-                    val msg = Message(message = "Message" , body = "body")
-                    MessageCard(message = msg)
+
+             /*       Surface(modifier = Modifier.padding(WindowInsets.systemBars.asPaddingValues())) {
+                        val msg = Message(message = "Message", body = "body")
+                        MessageCard(message = msg)
+
+              */
+                    }
+                    Conversation(messages = SampleData.conversationSample)
+
                 }
             }
         }
     }
-}
+
+
 
 data class Message(
     var message: String = "MessageCard",
@@ -40,25 +70,43 @@ data class Message(
 )
 
 
-
-
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
 @Composable
 fun MessageCard(
-    message: Message)
-{
-    Row{
-        Image(painter = painterResource(id = R.drawable.), contentDescription = )
-        Column{
-            Text(text = message.message)
-            Text(text = message.desc)
+    message: Message,
+    isRightAligned: Boolean
+) {
+    Row(modifier = Modifier
+                        .padding(all = 9.dp)
+                        .fillMaxWidth(),
+        horizontalArrangement = if(isRightAligned) Arrangement.End else Arrangement.Start) {
+        Image(
+            painter = painterResource(id = R.mipmap.ic_launcher_foreground),
+            contentDescription = "Imagem do Avatat",
+            modifier = Modifier
+                //altera o tam da imagem
+                .size(40.dp)
+                //Corta a img em algum formato(ex. Circle,Square)
+                .clip(CircleShape)
+                .border(width = 1.5.dp, MaterialTheme.colorScheme.primary, CircleShape)
+
+        )
+        Spacer(modifier = Modifier.width(8.dp))
+
+        Column {
+            Text(
+                text = message.message,
+                color = MaterialTheme.colorScheme.secondary,
+                style = MaterialTheme.typography.titleSmall
+
+            )
+            Spacer(modifier = Modifier.height(8.dp))
+            Surface (shape = MaterialTheme.shapes.medium, shadowElevation = 2.dp){
+                Text(
+                    text = message.desc,
+                    style = MaterialTheme.typography.bodyMedium
+                )
+            }
+
         }
     }
 
@@ -66,8 +114,45 @@ fun MessageCard(
 
 @Preview(showBackground = true)
 @Composable
-fun GreetingPreview() {
-    MaterialDesignTheme {
-        Greeting("Android")
+fun MessageCardPreview() {
+    Surface(modifier = Modifier
+                        .padding(WindowInsets.systemBars.asPaddingValues())
+                        .absoluteOffset(0.dp)
+    ) {
+        val msg = Message(message = "Message", body = "body")
+        MessageCard(message = msg, isRightAligned = false)
     }
+}
+
+
+@Composable
+fun Conversation (messages: List<Message>){
+    LazyColumn {
+        itemsIndexed(messages){index, message ->
+            MessageCard(message = message, isRightAligned = index % 2 == 0)
+        }
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun ConversationPreview (){
+
+    Surface ( modifier = Modifier
+                        .fillMaxSize()
+    ){
+       Conversation(messages = SampleData.conversationSample) 
+    }
+}
+
+
+object SampleData{
+    val conversationSample = listOf(
+        Message("Mensagem 1", body = "Body A"),
+        Message("Mensagem 2", body = "Body A"),
+        Message("Mensagem 3", body = "Body A"),
+        Message("Mensagem 4", body = "Body A"),
+        Message("Mensagem 5", body = "Body A"),
+        Message("Mensagem 6", body = "Body A")
+    )
 }
