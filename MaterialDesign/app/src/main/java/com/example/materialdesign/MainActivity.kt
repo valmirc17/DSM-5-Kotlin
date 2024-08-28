@@ -18,6 +18,7 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
@@ -147,26 +148,34 @@ fun MessageCardPreview() {
 
 @Composable
 fun Conversation(messages: List<Message>) {
-    LazyColumn {
-        itemsIndexed(messages) { index, message ->
-            val isImpar = index % 2 == 1
-            MessageCard(message = message, isImpar = isImpar)
+    Column (      modifier = Modifier
+        .fillMaxSize()
+        .padding(8.dp) ){
 
+        //colocar topBar aqui
+        TopBar( )
+        LazyColumn {
+            itemsIndexed(messages) { index, message ->
+                val isImpar = index % 2 == 1
+                MessageCard(message = message, isImpar = isImpar)
+            }
+        }
+            Row { Modifier
+                    .fillMaxWidth();
+
+                    Spacer(modifier = Modifier.height(8.dp))
+                    TextField(value = "",
+                        onValueChange = {},
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(8.dp))
+
+
+            }
         }
     }
-    Row { Modifier
-            .fillMaxWidth()
-
-        TextField(value = "",
-            onValueChange = {},
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(8.dp))
 
 
-
-    }
-}
 
 @Preview(showBackground = true)
 @Composable
