@@ -16,10 +16,12 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.VerticalAlignmentLine
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -130,6 +132,7 @@ fun MessageCard(
     }
 }
 
+
 @Preview(showBackground = true)
 @Composable
 fun MessageCardPreview() {
@@ -148,7 +151,20 @@ fun Conversation(messages: List<Message>) {
         itemsIndexed(messages) { index, message ->
             val isImpar = index % 2 == 1
             MessageCard(message = message, isImpar = isImpar)
+
         }
+    }
+    Row { Modifier
+            .fillMaxWidth()
+
+        TextField(value = "",
+            onValueChange = {},
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(8.dp))
+
+
+
     }
 }
 
@@ -157,6 +173,8 @@ fun Conversation(messages: List<Message>) {
 fun ConversationPreview() {
     Surface(modifier = Modifier.fillMaxSize()) {
         Conversation(messages = SampleData.conversationSample)
+
+
     }
 }
 
@@ -169,4 +187,6 @@ object SampleData {
         Message("Mensagem 4", body = "Body A"),
         Message("Mensagem 5", body = "Body A")
     )
+    
+
 }
