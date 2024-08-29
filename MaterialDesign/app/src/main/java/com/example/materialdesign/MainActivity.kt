@@ -26,16 +26,14 @@ import androidx.compose.material3.TextField
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults.topAppBarColors
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.VerticalAlignmentLine
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.materialdesign.ui.theme.MaterialDesignTheme
+import kotlinx.coroutines.NonCancellable.message
 
 class MainActivity : ComponentActivity() {
 
@@ -45,45 +43,61 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            Scaffold(modifier = Modifier.fillMaxSize(),
-                topBar = {
-                    TopAppBar(
-                        title = {
-                            Text("Top App Bar")
-                        },
-                        colors = topAppBarColors(
-                            containerColor = MaterialTheme.colorScheme.primaryContainer,
-                            titleContentColor = MaterialTheme.colorScheme.primary
-                        )
-                    )
-                },
 
-                bottomBar = {
-                    BottomAppBar (
-                        containerColor = MaterialTheme.colorScheme.primaryContainer,
-                        contentColor = MaterialTheme.colorScheme.primary
-                    ) {
-                        Text(text = "Bottom App Bar",
-                            modifier = Modifier.fillMaxWidth(),
-                            textAlign = TextAlign.Center)
-                    }
-                },
-
-                floatingActionButton = {
-                    FloatingActionButton(onClick = { /*TODO*/ }) {
-                        Icon(imageVector = Icons.Default.Add, contentDescription = "Add")
-
-                    }
-                }
-            )
             MaterialDesignTheme {
+
+                Scaffold(
+                    modifier = Modifier.fillMaxSize(),
+                    topBar = {
+                        TopAppBar(
+                            title = {
+                                Text("Top App Bardsadsdsadsadsa")
+                            },
+                            colors = topAppBarColors(
+                                containerColor = MaterialTheme.colorScheme.primaryContainer,
+                                titleContentColor = MaterialTheme.colorScheme.primary
+                            )
+                        )
+                    },
+
+                    bottomBar = {
+                        BottomAppBar(
+                            containerColor = MaterialTheme.colorScheme.primaryContainer,
+                            contentColor = MaterialTheme.colorScheme.primary
+                        ) {
+                            Text(
+                                text = "Bottom App Basaffsafasfsafsar",
+                                modifier = Modifier.fillMaxWidth(),
+                                textAlign = TextAlign.Center
+                            )
+                        }
+                    },
+
+                    floatingActionButton = {
+                        FloatingActionButton(onClick = { /*TODO*/ }) {
+                            Icon(imageVector = Icons.Default.Add, contentDescription = "Add")
+
+                        }
+                    }
+                ) {
+                       innerPadding ->
+                   Conversation(messages = message)
+                }
+
+
             }
-
-
 
 
         }
     }
+
+
+}
+
+class MaterialDesignTheme(function: @Composable () -> Unit) {
+
+}
+
 
 
 @Composable
@@ -113,7 +127,7 @@ fun TopBar(){
                 text = "Titulo",
                 style = MaterialTheme.typography.titleLarge,
                 modifier = Modifier.weight(.8f),
-                color = Color.White
+                color = Color.Black
             )
         }
 
