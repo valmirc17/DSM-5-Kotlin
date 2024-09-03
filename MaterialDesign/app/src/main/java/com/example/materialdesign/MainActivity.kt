@@ -23,8 +23,6 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
-import androidx.compose.material3.TopAppBar
-import androidx.compose.material3.TopAppBarDefaults.topAppBarColors
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -33,7 +31,10 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import kotlinx.coroutines.NonCancellable.message
+import com.example.materialdesign.ui.components.CustomActionButton
+import com.example.materialdesign.ui.components.CustomBottomAppBar
+import com.example.materialdesign.ui.components.CustomTopAppBar
+
 
 class MainActivity : ComponentActivity() {
 
@@ -43,61 +44,39 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-
             MaterialDesignTheme {
-
                 Scaffold(
                     modifier = Modifier.fillMaxSize(),
                     topBar = {
-                        TopAppBar(
-                            title = {
-                                Text("Top App Bardsadsdsadsadsa")
-                            },
-                            colors = topAppBarColors(
-                                containerColor = MaterialTheme.colorScheme.primaryContainer,
-                                titleContentColor = MaterialTheme.colorScheme.primary
-                            )
-                        )
+                            CustomTopAppBar(title = "Só Bagunça")
                     },
-
                     bottomBar = {
-                        BottomAppBar(
-                            containerColor = MaterialTheme.colorScheme.primaryContainer,
-                            contentColor = MaterialTheme.colorScheme.primary
-                        ) {
-                            Text(
-                                text = "Bottom App Basaffsafasfsafsar",
-                                modifier = Modifier.fillMaxWidth(),
-                                textAlign = TextAlign.Center
-                            )
-                        }
+                            CustomBottomAppBar()
                     },
-
                     floatingActionButton = {
-                        FloatingActionButton(onClick = { /*TODO*/ }) {
-                            Icon(imageVector = Icons.Default.Add, contentDescription = "Add")
-
-                        }
+                        CustomActionButton()
                     }
-                ) {
-                       innerPadding ->
-                   Conversation(messages = message)
+                )
+                { innerPadding ->
+                   Greeting(
+                        name = "Android",
+                        modifier = Modifier.padding(innerPadding)
+                   )
                 }
-
-
             }
-
-
         }
     }
-
-
 }
 
 class MaterialDesignTheme(function: @Composable () -> Unit) {
 
 }
-
+@Composable
+fun Greeting(name:String, modifier: Modifier = Modifier) {
+    Text( text = "Lorem ipsum dolor sit amet, Vestibulum interdum at dui ut ornare. Etiam ullamcorper bibendum ultricies. Vestibulum a mauris nunc. Nam odio leo, tincidunt ut elit sed, molestie euismod erat. Sed mollis viverra dolor, feugiat porta nisi eleifend sit amet. Curabitur non maximus mi, in accumsan turpis. Suspendisse placerat condimentum pharetra. Duis fermentum felis nec blandit ornare. Nullam feugiat hendrerit cursus. Curabitur quis pretium libero, at congue ligula. Etiam nibh augue, convallis quis consectetur in, pellentesque vel diam. Aenean eu dignissim magna, ut facilisis purus. Maecenas malesuada mattis nisl, sit amet pretium dui mattis sed. Sed mollis leo magna, nec vehicula neque condimentum non",
+        modifier = modifier
+    )
+}
 
 
 @Composable
