@@ -45,23 +45,24 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             MaterialDesignTheme {
+                Text(text = "TESTE")
                 Scaffold(
                     modifier = Modifier.fillMaxSize(),
                     topBar = {
-                            CustomTopAppBar(title = "Só Bagunça")
+                        CustomTopAppBar(title = "Só Bagunça")
                     },
                     bottomBar = {
-                            CustomBottomAppBar()
+                        CustomBottomAppBar()
                     },
                     floatingActionButton = {
                         CustomActionButton()
                     }
                 )
                 { innerPadding ->
-                   Greeting(
+                    Greeting(
                         name = "Android",
                         modifier = Modifier.padding(innerPadding)
-                   )
+                    )
                 }
             }
         }
@@ -71,30 +72,32 @@ class MainActivity : ComponentActivity() {
 class MaterialDesignTheme(function: @Composable () -> Unit) {
 
 }
+
 @Composable
-fun Greeting(name:String, modifier: Modifier = Modifier) {
-    Text( text = "Lorem ipsum dolor sit amet, Vestibulum interdum at dui ut ornare. Etiam ullamcorper bibendum ultricies. Vestibulum a mauris nunc. Nam odio leo, tincidunt ut elit sed, molestie euismod erat. Sed mollis viverra dolor, feugiat porta nisi eleifend sit amet. Curabitur non maximus mi, in accumsan turpis. Suspendisse placerat condimentum pharetra. Duis fermentum felis nec blandit ornare. Nullam feugiat hendrerit cursus. Curabitur quis pretium libero, at congue ligula. Etiam nibh augue, convallis quis consectetur in, pellentesque vel diam. Aenean eu dignissim magna, ut facilisis purus. Maecenas malesuada mattis nisl, sit amet pretium dui mattis sed. Sed mollis leo magna, nec vehicula neque condimentum non",
+fun Greeting(name: String, modifier: Modifier = Modifier) {
+    Text(
+        text = "Lorem ipsum dolor sit amet, Vestibulum interdum at dui ut ornare. Etiam ullamcorper bibendum ultricies. Vestibulum a mauris nunc. Nam odio leo, tincidunt ut elit sed, molestie euismod erat. Sed mollis viverra dolor, feugiat porta nisi eleifend sit amet. Curabitur non maximus mi, in accumsan turpis. Suspendisse placerat condimentum pharetra. Duis fermentum felis nec blandit ornare. Nullam feugiat hendrerit cursus. Curabitur quis pretium libero, at congue ligula. Etiam nibh augue, convallis quis consectetur in, pellentesque vel diam. Aenean eu dignissim magna, ut facilisis purus. Maecenas malesuada mattis nisl, sit amet pretium dui mattis sed. Sed mollis leo magna, nec vehicula neque condimentum non",
         modifier = modifier
     )
 }
 
 
 @Composable
-fun TopBar(){
+fun TopBar() {
     Surface(
         modifier = Modifier
             .fillMaxWidth()
             .height(56.dp),
         color = MaterialTheme.colorScheme.primary
     ) {
-        Row (
+        Row(
             modifier = Modifier
                 .padding(horizontal = 16.dp, vertical = 8.dp)
                 .fillMaxSize(),
             verticalAlignment = androidx.compose.ui.Alignment.CenterVertically
-        ){
+        ) {
             Image(
-                painter= painterResource(id = R.mipmap.ic_launcher_foreground),
+                painter = painterResource(id = R.mipmap.ic_launcher_foreground),
                 contentDescription = "Logo",
                 modifier = Modifier
                     .size(40.dp)
@@ -128,7 +131,8 @@ fun MessageCard(
     //Alinhar a mensagem inteira à esquerda ou direita
     val alignment = if (isImpar) Arrangement.Start else Arrangement.End
     val backgroundColor = if (isImpar) Color.Red else Color.Blue
-    val textStyle = if (isImpar) MaterialTheme.typography.titleSmall else MaterialTheme.typography.titleLarge
+    val textStyle =
+        if (isImpar) MaterialTheme.typography.titleSmall else MaterialTheme.typography.titleLarge
 
     Row(
         modifier = Modifier
@@ -179,33 +183,37 @@ fun MessageCardPreview() {
 
 @Composable
 fun Conversation(messages: List<Message>) {
-    Column (      modifier = Modifier
-        .fillMaxSize()
-        .padding(8.dp) ){
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(8.dp)
+    ) {
 
         //colocar topBar aqui
-        TopBar( )
+        TopBar()
         LazyColumn {
             itemsIndexed(messages) { index, message ->
                 val isImpar = index % 2 == 1
                 MessageCard(message = message, isImpar = isImpar)
             }
         }
-            Row { Modifier
-                    .fillMaxWidth();
+        Row {
+            Modifier
+                .fillMaxWidth();
 
-                    Spacer(modifier = Modifier.height(8.dp))
-                    TextField(value = "",
-                        onValueChange = {},
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(8.dp))
+            Spacer(modifier = Modifier.height(8.dp))
+            TextField(
+                value = "",
+                onValueChange = {},
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(8.dp)
+            )
 
 
-            }
         }
     }
-
+}
 
 
 @Preview(showBackground = true)
@@ -227,6 +235,6 @@ object SampleData {
         Message("Mensagem 4", body = "Body A"),
         Message("Mensagem 5", body = "Body A")
     )
-    
+
 
 }
