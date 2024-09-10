@@ -79,7 +79,7 @@ class MainActivity : ComponentActivity() {
 
                         CustomFilledButton(onClick =  println("asdsad"),
                         CustomFilledTonalButton(onClick =  println("asdsad"),
-                        CustomOutinedButtonon(Click =  println("asdsad")
+                        CustomOutLinedButton(Click =  println("asdsad")
 
 
                     }
