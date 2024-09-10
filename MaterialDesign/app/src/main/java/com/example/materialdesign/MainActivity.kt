@@ -44,6 +44,9 @@ import com.example.materialdesign.ui.components.CustomBottomAppBar
 import com.example.materialdesign.ui.components.button.CustomFilledButton
 import com.example.materialdesign.ui.components.button.CustomFilledTonalButton
 import com.example.materialdesign.ui.components.button.CustomOutinedButton
+import com.example.materialdesign.ui.components.fab.CustomFAB
+import com.example.materialdesign.ui.components.fab.CustomFABLarge
+import com.example.materialdesign.ui.components.fab.CustomFABSmall
 import com.example.materialdesign.ui.components.topAppBar.CustomCenterAlignedTopAppBar
 import com.example.materialdesign.ui.components.topAppBar.SmallTopAppBar
 import com.example.materialdesign.ui.theme.MaterialDesignTheme
@@ -77,9 +80,9 @@ class MainActivity : ComponentActivity() {
                     ) {
 
 
-                        CustomFilledButton(onClick =  println("asdsad"),
-                        CustomFilledTonalButton(onClick =  println("asdsad"),
-                        CustomOutLinedButton(Click =  println("asdsad")
+                        CustomFAB(onClick = {println("teste")})
+                        CustomFABSmall(onClick = {println("teste")})
+                        CustomFABLarge(onClick = {println("teste")})
 
 
                     }
